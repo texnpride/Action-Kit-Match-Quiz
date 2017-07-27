@@ -70,6 +70,53 @@
   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <script type="text/javascript" src="vendor/dombars.min.js"></script>
     <script src="javascript/PersonalityQuizzer.js"></script>
+  
+  <script id="quiz_template" type="text/x-handlebars-template">
+	<div class="quiz">
+		<div class="questions">
+			{{{outlet 'questions'}}}
+		</div>
+		<div class="results">
+			{{{outlet 'results'}}}
+		</div>
+	</div>
+</script>
+
+
+<script id="question_template" type="text/x-handlebars-template">
+	<div class="question" >
+		<h1 style="background:{{color}}">{{{title}}}</h1>
+		<div class="answers">
+				{{{outlet 'answers'}}}
+		</div>
+	</div>
+</script>
+
+<script id="answer_template" type="text/x-handlebars-template">
+	
+	<div class="answer {{#if selected}}selected{{/if}}" >
+		<div class="wrapper">
+		<div class="table">
+			<div class="text" style="background:{{parent.color}}">
+				{{text}}
+			</div>
+		</div>
+		</div>
+		<div class="footer">
+			<div class="checkbox"></div>
+		</div>
+	</div>
+	
+</script>
+
+<script id="result_template" type="text/x-handlebars-template">
+		<div class="result {{#if selected}}selected{{/if}}" >
+			<div class="wrapper">
+				<div class="title">{{title}}</div>
+				<p>{{text}}</p>
+			</div>
+		</div>
+</script>
 
 </body>
 </html>
