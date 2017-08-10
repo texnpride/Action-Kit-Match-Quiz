@@ -1,333 +1,126 @@
-var PersonalityQuizzer = (function($, DOMBars, window, document){
-	'use strict';
-
-	var Model = function(options) {
-		var options = options || {};
-
-		var model = function(data) {
-			this.data = data || {};
-
-			if(options.init) {
-				options.init.call(this);
-			}
-
-		};
-
-		var Mixin = function(){};
-		Mixin.prototype = {
-			set: function(key, value) {
-				this.data[key] = value;
-				$(this).trigger("change:"+key, value);
+var quiz = new PersonalityQuizzer();
+	quiz.set("title","What Should I Do for Open Access Week?")
+	quiz.addQuestion({ 
+		color: "#7FD863",
+		title: "How much experience do you have working on open access week activities?",
+		answers: [
+			{ 
+				text: "None",
+				result: 1
 			},
-			get: function(key) {
-				return this.data[key];
+			{ 
+				text: "Low",
+				result: 2
 			},
-			on: function(e, f) {
-				$(this).on(e, f);
+			{ 
+				text: "Medium",
+				result: 3
 			},
-			off: function(e, f) {
-				$(this).off(e, f);
-			}
-		};
+			{ 
+				text: "High",
+				result: 4
+			},
+		]
+	});
 
-		$.extend(model.prototype, Mixin.prototype, options);
 
-		return model;
+quiz.addQuestion({ 
+		color: "#7FD863",
+		title: "Which audience are you the most interested in reaching?",
+		answers: [
+			{ 
+				text: "Faculty or Researchers",
+				result: 1
+			},
+			{ 
+				text: "Students",
+				result: 2
+			},
+			{ 
+				text: "Librarians or Colleagues",
+				result: 3
+			},
+			{ 
+				text: "Public or Wide Audience",
+				result: 4
+			},
 
-	}
-	
-	var quizModel = Model({
-		init: function(){
-			var _this = this;
-			this.on("answered", function(){
-				if(_this.checkAnswered()) {
-					_this.calculateResult();
-				}
-			})
-		},
-		checkAnswered: function() {
-			var length = this.get("questions").length;
-			var answers = $(this.get("questions")).filter(function(){
-				return this.getAnswer();
-			}).length;
-
-			return length === answers;
-		},
-		calculateResult: function() {
-			var _this = this;
-			var answers = {};
-			$.each(this.get("questions"), function(i,v){
-				var answer = v.getAnswer();
-				var result = answer.get("result");
-
-				if(typeof result == "number") {
-					result = [result];
-				}
-
-				result.forEach(function(r){
-					answers[r] = answers[r] || 0;
-					answers[r] += answer.get("score");
-				})
-			});
-
-			var winnerId;
-			var topScore = 0;
-			$.each(answers, function(i,v){
-				if(v >= topScore) {
-					topScore = v;
-					winnerId = i;
-				}
-			})
-
-			if(winnerId) {
-				this.showResult(winnerId);
-			}
-
-			this.set("done", true)
-
-		},
-		showResult: function(resultId) {
-			var result = $(this.get("results")).filter(function(){
-				return this.get("id") == resultId;
-			})[0];
+quiz.addQuestion({ 
+		color: "#7FD863",
+		title: "Choose the strengths that best describe you.",
+		answers: [
+			{ 
+				text: "Connecting to others and working together",
+				result: 1
+			},
+			{ 
+				text: "Enthusiasm and learning from experiements",
+				result: 2
+			},
+			{ 
+				text: "Knowledge and Experience",
+				result: 3
+			},
+			{ 
+				text: "New ideas and learning new things",
+				result: 4
+			},
+quiz.addQuestion({ 
+		color: "#7FD863",
+		title: "How much do you partner with others for open access week?",
+		answers: [
+			{ 
+				text: "It's mostly Me",
+				result: 1
+			},
+			{ 
+				text: "Primarily Me, with some help from others",
+				result: 2
+			},
+			{ 
+				text: "It's a team effort!",
+				result: 3
+			},
+			{ 
+				text: "Working with partners outside my organization",
+				result: 4
+			},
+		]
+	});
 			
-			result.set("selected", true);
-			var el = result.get("el");
-			var elOffset = $(el).offset().top
-			var windowHeight = $(window).height();
-			var scrollTo = elOffset - (windowHeight / 3);
 			
-			$(document.body).animate({
-				scrollTop: scrollTo
-			}, 2000);
-		}
-	});
-	var questionModel = Model({
-		init: function() {
-			var _this = this;
-			this.on("answered", function(){
-				$(_this.get("parent")).trigger("answered");
-			})
+
+	quiz.addResults([
+		{
+			id: 1,
+			text: "New Natalia
+You might be new new to open advocacy, but your new ideas and enthusiasm to celebrate Open Access Week is inspiring! If you are organizing outreach and events primarily alone, you will needs materials and ideas to raise awareness at your institution.
+Suggested activities for New Natalias: social media campaign, film screening and discussion or sending factsheets.
+Resources for New Natalia: 100 Stories of Impact, The Internet's Own Boy (film and background), factsheets and other resources."
 		},
-		getAnswer: function() {
-			return $(this.get("answers")).filter(function(){
-				return this.get("selected");
-			})[0];
-		}
-	});
-	var answerModel = Model({
-		init: function(){
-			if(!this.get("score")) {
-				this.set("score", 1);
-			}
+		{
+			id: 2,
+			text: "Amped Amal
+You may be thrilled at the success of last year, and want to grow your institution’s Open Access Week events this year! You might primarily be organizing the week alone, but would like to involve colleagues in planning. An Amal might their zeal and ability to experiment to get more faculty engagement with the institutional repository. With solid experience under your belt, all you need is more resources and collaborators to break your previous record.
+Suggested activities for Amped Amal: an Upload-a-thon with department liaisons, a workshop with trivia night, or a meeting with with administration to advance open.
+Resources: workshop slidedeck, trivia ideas, quiz questions, upload-a-thon email template and talking points for administration."
 		},
-		events: {
-			"click >": function(e) {
-				if(!quiz.get("done")) {
-					var answers = e.data.model.get("parent").get("answers");
-					$.each(answers, function(i,v){
-						v.set("selected", false)
-					})
-					e.data.model.set("selected", true);
-					$(e.data.model.get("parent")).trigger("answered");
-				}
-			}
-		}
-	});
-	var resultModel = Model();
+		{
+			id: 3,
+			text: "Growing Gene
 
-	DOMBars.registerHelper('outlet', function actionHelper(name) {
-		var models = this.get(name);
-		if(models) {
-			var el = document.createElement("div");
-			$.each(models, function(i,v){
-				var t = v.get("el");
+With the experience, knowledge, and resources of a seasoned advocate it may be your goal to grow Open Access Week and produce more tangible advocacy results throughout the year. You may be an advocate in a well-developed department at a research-intensive institution that offers you a small budget. You're most likely collaborating with a handful of very supportive colleagues to plan Open Access week events this year. Consider targeting a new audience, such as students, for wider impact.
+Suggested activities for Growing Genes: panel of faculty and students, invited speakers, discuss a resolution with administration, request student organizations to sign the Right to Research resolution or make a statement in support of open.
+Resources for Growing Genes: Right to Research brochures, resolution language, talking points for administration, and the Open Speakers database.
+"
+		},
+		{
+			id: 4,
+			text: "Connected Cate
 
-				if(v.events) {
-					$.each(v.events, function(ii,vv){
-						var breakAt = ii.indexOf(" ");
-						var selector = ""
-						var eventName = ""
-						if(breakAt) {
-							eventName = ii.substring(0,breakAt);
-							selector = ii.substring(breakAt, ii.length)
-						} else {
-							eventName = ii;
-						}
-						$(t).on(eventName, selector, { model: v}, vv)
-					});
-				}
-				$(el).append(t);
-			
-			});
-
-			return el;
-		}
-		
-		
-	});
-
-
-	var element = $("<div>");
-	var quiz = new quizModel({
-			title: "",
-			questions: [],
-			results: []
-		});
-
-	var defaults = {
-		append: "body",
-		quiz_template: "#quiz_template",
-		question_template: "#question_template",
-		answer_template: "#answer_template",
-		result_template: "#result_template",
-		shuffle: true,
-		debounce: 10,
-	}
-	var settings = {};
-
-	var templates = {};
-
-	function shuffle(array) {
-		var currentIndex = array.length
-		, temporaryValue
-		, randomIndex
-		;
-
-		// While there remain elements to shuffle...
-		while (0 !== currentIndex) {
-
-			// Pick a remaining element...
-			randomIndex = Math.floor(Math.random() * currentIndex);
-			currentIndex -= 1;
-
-			// And swap it with the current element.
-			temporaryValue = array[currentIndex];
-			array[currentIndex] = array[randomIndex];
-			array[randomIndex] = temporaryValue;
-		}
-
-		return array;
-	}
-
-
-	function queueRender() {
-		var _this = this;
-		if(typeof settings.queueRenderTimeout !== "undefined") {
-			clearTimeout(settings.queueRenderTimeout)
-		}
-
-		settings.queueRenderTimeout = setTimeout(function(){
-			render();
-		}, settings.debounce);
-	}
-
-	function render() {
-		element.find(">").remove();
-		var t = templates.quiz(quiz);
-		element.append(t);
-
-		$(settings.append).append(element);
-	}
-
-	var out = function(data) {
-		var data = data || {};
-		settings = $.extend( {}, defaults, data.options );
-
-		templates.quiz = DOMBars.compile($(settings.quiz_template).html());
-		templates.question = DOMBars.compile($(settings.question_template).html());
-		templates.answer = DOMBars.compile($(settings.answer_template).html());
-		templates.result = DOMBars.compile($(settings.result_template).html());
-
-    	DOMBars.registerPartial("question", templates.question);
-    	DOMBars.registerPartial("answer", templates.answer);
-    	DOMBars.registerPartial("result", templates.result);
-
-		DOMBars.get = function (object, property) {
-			return object.get(property);
-		};
-		DOMBars.subscribe = function (object, property, callback) {
-			object.on('change:' + property, callback);
-		};
-		DOMBars.unsubscribe = function (object, property, callback) {
-			object.off('change:' + property, callback);
-		};
-
-		if(data.questions) {
-			quiz.set("questions", data.questions);
-		}
-
-		if(data.results) {
-			quiz.set("results",data.results);
-		}
-
-		if(data.title) {
-			quiz.set("title", data.title);
-		}
-
-		queueRender();
-	}
-
-	out.prototype.addQuestions = function(questions) {
-		var _this = this;
-		$.each(questions, function(i, v){
-			_this.addQuestion(v);
-		})
-	}
-	out.prototype.addQuestion = function(question) {
-		var answers = [];
-		$.each(question.answers, function(i, v){
-			var a = new answerModel(v);
-			a.set("el",$("<div />").append(templates.answer(a)))
-			answers.push(a)
-		})
-		if(settings.shuffle) {
-			shuffle(answers)
-		}
-		question.answers = answers;
-		var q = new questionModel(question);
-		q.set("parent", quiz);
-
-		$.each(q.get("answers"),function(i,v) {
-			v.set("parent", q);
-		})
-
-		var questions = quiz.get("questions");
-		q.set("el", $("<div />").append(templates.question(q)));
-		questions.push(q);
-		quiz.set("questions", questions);
-		queueRender();
-	}
-
-	out.prototype.addResults = function(results) {
-		var _this = this;
-		$.each(results, function(i, v){
-			_this.addResult(v);
-		})
-	}
-	out.prototype.addResult = function(result) {	
-		var results = quiz.get("results");
-		var r = new resultModel(result);
-		r.set("el", $("<div />").append(templates.result(r)));
-		r.set("parent", quiz);
-		results.push(r);
-		quiz.set("results",results)
-		queueRender();
-	}
-
-	out.prototype.render = function() {
-		queueRender.call(this);		
-	}
-
-	out.prototype.set = function(key, value) {
-		quiz.set(key, value);
-	}
-	out.prototype.get = function(key) {
-		quiz.get(key)
-	}
-
-
-	return out;
-
-
-})(jQuery, DOMBars, window, document);
+Building relationships and coalitions is your strength! It's possible you live in a city with multiple institutions and organizations interested in Open Access. You’d like to take these connections and work together on larger events for this Open Access Week. If you are hoping to leverage recent conversations about open to create taskforces with deliverables during Open Access Week, here is a place to start.
+Suggested activities for Connected Cates: user support and training on tools for open, meeting with political officials to discuss policy or conducting multiple workshops across institutions.
+Resources for Connected Cates: talking points for administrations, workshop, edit-a-thons, data day training materials, doodle and sched for coordinating events.
+"
+		},
+	]);
