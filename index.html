@@ -1,77 +1,129 @@
-<!DOCTYPE html>
-<html >
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>What Should I do for Open Access Week Quiz</title>
-  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <link rel="stylesheet" type="text/css" href="style/stylesheet.css" media="screen">
-  
-    
+	<title></title>
 
-  
+
+	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+	<script type="text/javascript" src="vendor/dombars.min.js"></script>
+
+
 </head>
-
 <body>
-  <div class="quiz">
-  
-  <h2 class="quiz-question">Q1:How much experience do you have working on open access week activities?</h2>
-  <ul data-quiz-question="1">
-    <li class="quiz-answer" data-quiz-answer="a">None</li>
-    <li class="quiz-answer" data-quiz-answer="b">Low</li>
-    <li class="quiz-answer" data-quiz-answer="c">Medium</li>
-    <li class="quiz-answer" data-quiz-answer="d">High</li>
-  </ul>
-  
-  <h2 class="quiz-question">Q2:Which audience are you the most interested in reaching?</h2>
-  <ul data-quiz-question="2">
-    <li class="quiz-answer" data-quiz-answer="a">Faculty or Researchers</li>
-    <li class="quiz-answer" data-quiz-answer="b">Students</li>
-    <li class="quiz-answer" data-quiz-answer="c">Librarians</li>
-    <li class="quiz-answer" data-quiz-answer="d">Public or Wide Audience</li>
-  </ul>
-  
-  <h2 class="quiz-question">Q3: Choose the strengths that best describe you.</h2>
-  <ul data-quiz-question="3">
-    <li class="quiz-answer" data-quiz-answer="a">Connecting to others and working togethers</li>
-    <li class="quiz-answer" data-quiz-answer="b">Enthusiasm and learning from experiments</li>
-    <li class="quiz-answer" data-quiz-answer="c">Knowledge and Experience</li>
-    <li class="quiz-answer" data-quiz-answer="d">New ideas and learning new things</li>
-  </ul>
-  
-  <h2 class="quiz-question">Q4:  How much do you partner with others for open access week?</h2>
-  <ul data-quiz-question="4">
-    <li class="quiz-answer" data-quiz-answer="a">It’s mostly me</li>
-    <li class="quiz-answer" data-quiz-answer="b">Primarily me, with some help from others</li>
-    <li class="quiz-answer" data-quiz-answer="c">It’s a team effort!</li>
-    <li class="quiz-answer" data-quiz-answer="d">Working with partners outside my organization
-</li>
-  </ul>
-  
-  <h2 class="quiz-question">Q5:What kind of materials do you have access to now?</h2>
-  <ul data-quiz-question="5">
-    <li class="quiz-answer" data-quiz-answer="a">None</li>
-    <li class="quiz-answer" data-quiz-answer="b">Pre-made items from professional organizations
-</li>
-    <li class="quiz-answer" data-quiz-answer="c">I have a budget from my organization</li>
-    <li class="quiz-answer" data-quiz-answer="d">No materials, but the help of others</li>
-  </ul>
-  
-  <h2 class="quiz-question">Q6: What kind of activity are you interested in working on the most?</h2>
-  <ul data-quiz-question="6">
-    <li class="quiz-answer" data-quiz-answer="a">Virtual</li>
-    <li class="quiz-answer" data-quiz-answer="b">Workshops</li>
-    <li class="quiz-answer" data-quiz-answer="c">Activism</li>
-    <li class="quiz-answer" data-quiz-answer="d">Events</li>
-  </ul>
-</div>
 
-<div class="quiz-result"></div>
-  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <script type="text/javascript" src="vendor/dombars.min.js"></script>
-    <script src="javascript/PersonalityQuizzer.js"></script>
-  
-  <script id="quiz_template" type="text/x-handlebars-template">
+<a href="https://github.com/stefanhayden/PersonalityQuizzer/"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github-camo.global.ssl.fastly.net/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+
+
+		<style type="text/css">
+		.clearfix:after {
+		  content: "";
+		  display: table;
+		  clear: both;
+		}
+		.quiz {
+			width:746px;
+			font-family: "Helvetica Neue",Arial,Helvetica,sans-serif; 
+		}
+		.question:after {
+		  content: "";
+		  display: table;
+		  clear: both;
+		}
+		.question h1 {
+			text-align: center;
+			background:#7FD863;
+			font-size: 50px; 
+			font-weight:bold; 
+			padding:10px 0px;
+			font-family: "Helvetica Neue",Arial,Helvetica,sans-serif; 
+			color:#FFF;
+			text-shadow: 2px 2px 2px #000;
+		}
+		.answers {
+			margin-left: -15px;
+		}
+		.answer {
+			width:365px;
+			min-height:150px;
+			float:left;
+			background:#DDD;
+			margin:0px 0px 10px 15px;
+			color:#FFF;
+			box-shadow: 1px 1px 1px #AAA;
+		}
+		.answer:hover {
+			background: #EEE;
+		}
+		.answer.selected {
+			background:rgb(255, 255, 112);
+		}
+		.answer .wrapper {
+			margin:20px;
+		}
+		.answer .wrapper .table {
+			display: table;
+			width:100%;
+		}
+		.answer .text {
+			text-shadow: 2px 2px rgba(0,0,0,0.4);
+			box-shadow: 1px 1px 1px #AAA;
+			font-weight:900;
+			text-align: center;
+			background:#7FD863;
+			height: 90px;
+			font-size: 29px; 
+			font-family: "Helvetica Neue",Arial,Helvetica,sans-serif; 
+			-webkit-font-smoothing: antialiased; 
+			font-smoothing: antialiased;
+			display:table-cell; 
+			vertical-align:middle;
+		}
+		.answer .checkbox {
+			height: 20px;
+			width:20px;
+			background:#FFF;
+			float:right;
+			margin:0px 20px 10px 0px;
+			box-shadow: 1px 1px 2px #000;
+			position: relative;
+		}
+		.answer.selected .checkbox:before {
+			color:#000;
+			font-size:40px;
+			content:"\2713\0020";
+			position: absolute;
+			top:-15px;
+			left:-5px;
+		}
+		.result {
+			display:none;
+		}
+		.result.selected {
+			display:block;
+		}
+		.result .wrapper {
+			padding:50px;
+			border:1px solid #AAA;
+		}
+		.result .wrapper:after {
+		  content: "";
+		  display: table;
+		  clear: both;
+		}
+		.result .title {
+			margin-bottom:20px;
+		}
+		.result .mainImage {
+			float:left;
+			margin-right: 30px;
+		}
+		.result p {
+			line-height: 1.5em;
+			margin:0px;
+		}
+	</style>
+
+
+<script id="quiz_template" type="text/x-handlebars-template">
 	<div class="quiz">
 		<div class="questions">
 			{{{outlet 'questions'}}}
@@ -112,10 +164,70 @@
 <script id="result_template" type="text/x-handlebars-template">
 		<div class="result {{#if selected}}selected{{/if}}" >
 			<div class="wrapper">
-				<div class="title">{{title}}</div>
+				<div class="title">{{parent.title}}</div>
 				<p>{{text}}</p>
 			</div>
 		</div>
+</script>
+
+
+<script type="text/javascript" src="PersonalityQuizzer.js"></script>
+
+<script type="text/javascript">
+	var quiz = new PersonalityQuizzer();
+	quiz.set("title","What Number are you?")
+	quiz.addQuestion({ 
+		color: "#7FD863",
+		title: "Pick a Number",
+		answers: [
+			{ 
+				text: "One or Two",
+				result: [1,2]
+			},
+			{ 
+				text: "Two",
+				result: 2
+			},
+		]
+	});
+	quiz.addQuestion({ 
+		color: "#63D8B3",
+		title: "Pick a Number",
+		answers: [
+			{ 
+				text: "One",
+				result: 1
+			},
+			{ 
+				text: "Two",
+				result: 2
+			},
+		]
+	});
+	quiz.addQuestion({ 
+		color: "#8463D8",
+		title: "Pick a Number",
+		answers: [
+			{ 
+				text: "One",
+				result: 1
+			},
+			{ 
+				text: "Two",
+				result: 2
+			},
+		]
+	});
+	quiz.addResults([
+		{
+			id: 1,
+			text: "You're a number 1"
+		},
+		{
+			id: 2,
+			text: "You're a Number 2"
+		},
+	]);
 </script>
 
 </body>
