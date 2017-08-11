@@ -2,4 +2,4 @@
 
 Modified by Camille Thomas 2017
 
-PersonalityQuizzer javascript created by stefan hayden 2014
+Template created by jan dennison: ["What Type of Thing Are You"Quiz with iQuery"] (https://codepen.io/jannypie/pen/xbLLMq)
