@@ -89,44 +89,44 @@ quiz.addQuestion({
 	});
 		quiz.addQuestion({ 
 		color: "#FF290D",
-		title: "How much experience do you have working on open access week activities?",
+		title: "What kind of materials do you have access to now?",
 		answers: [
 			{ 
 				text: "None",
 				result: 1
 			},
 			{ 
-				text: "Low",
+				text: "Pre-made items from professional organizations",
 				result: 2
 			},
 			{ 
-				text: "Medium",
+				text: "I have a budget from my organization",
 				result: 3
 			},
 			{ 
-				text: "High",
+				text: "No materials, but the help of others",
 				result: 4
 			},
 		]
 	});
 quiz.addQuestion({ 
 		color: "#FFAE0D",
-		title: "How much experience do you have working on open access week activities?",
+		title: "What kind of activities are you working on the most?",
 		answers: [
 			{ 
-				text: "None",
+				text: "Virtual",
 				result: 1
 			},
 			{ 
-				text: "Low",
+				text: "Workshop",
 				result: 2
 			},
 			{ 
-				text: "Medium",
+				text: "Advocacy or Activism",
 				result: 3
 			},
 			{ 
-				text: "High",
+				text: "Events",
 				result: 4
 			},
 		]
