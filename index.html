@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<a href="https://github.com/stefanhayden/PersonalityQuizzer/"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github-camo.global.ssl.fastly.net/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+<a href="https://github.com/camillet/Action-Kit-Match-Quiz/blob/master/javascript/PersonalityQuizzer.js"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github-camo.global.ssl.fastly.net/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
 
 
 		<style type="text/css">
@@ -173,62 +173,162 @@
 
 <script type="text/javascript" src="PersonalityQuizzer.js"></script>
 
-<script type="text/javascript">
-	var quiz = new PersonalityQuizzer();
-	quiz.set("title","What Number are you?")
+var quiz = new PersonalityQuizzer();
+	quiz.set("title","What Should I Do for Open Access Week?")
 	quiz.addQuestion({ 
-		color: "#7FD863",
-		title: "Pick a Number",
+		color: "#FFAE0D",
+		title: "How much experience do you have working on open access week activities?",
 		answers: [
 			{ 
-				text: "One or Two",
-				result: [1,2]
-			},
-			{ 
-				text: "Two",
-				result: 2
-			},
-		]
-	});
-	quiz.addQuestion({ 
-		color: "#63D8B3",
-		title: "Pick a Number",
-		answers: [
-			{ 
-				text: "One",
+				text: "None",
 				result: 1
 			},
 			{ 
-				text: "Two",
+				text: "Low",
 				result: 2
+			},
+			{ 
+				text: "Medium",
+				result: 3
+			},
+			{ 
+				text: "High",
+				result: 4
 			},
 		]
 	});
-	quiz.addQuestion({ 
-		color: "#8463D8",
-		title: "Pick a Number",
+
+
+quiz.addQuestion({ 
+		color: "#E8860C",
+		title: "Which audience are you the most interested in reaching?",
 		answers: [
 			{ 
-				text: "One",
+				text: "Faculty or Researchers",
 				result: 1
 			},
 			{ 
-				text: "Two",
+				text: "Students",
 				result: 2
+			},
+			{ 
+				text: "Librarians or Colleagues",
+				result: 3
+			},
+			{ 
+				text: "Public or Wide Audience",
+				result: 4
+			},
+
+quiz.addQuestion({ 
+		color: "#FF6900",
+		title: "Choose the strengths that best describe you.",
+		answers: [
+			{ 
+				text: "Connecting to others and working together",
+				result: 1
+			},
+			{ 
+				text: "Enthusiasm and learning from experiements",
+				result: 2
+			},
+			{ 
+				text: "Knowledge and Experience",
+				result: 3
+			},
+			{ 
+				text: "New ideas and learning new things",
+				result: 4
+			},
+quiz.addQuestion({ 
+		color: "#E8460C",
+		title: "How much do you partner with others for open access week?",
+		answers: [
+			{ 
+				text: "It's mostly Me",
+				result: 1
+			},
+			{ 
+				text: "Primarily Me, with some help from others",
+				result: 2
+			},
+			{ 
+				text: "It's a team effort!",
+				result: 3
+			},
+			{ 
+				text: "Working with partners outside my organization",
+				result: 4
 			},
 		]
 	});
+		quiz.addQuestion({ 
+		color: "#FF290D",
+		title: "What kind of materials do you have access to now?",
+		answers: [
+			{ 
+				text: "None",
+				result: 1
+			},
+			{ 
+				text: "Pre-made items from professional organizations",
+				result: 2
+			},
+			{ 
+				text: "I have a budget from my organization",
+				result: 3
+			},
+			{ 
+				text: "No materials, but the help of others",
+				result: 4
+			},
+		]
+	});
+quiz.addQuestion({ 
+		color: "#FFAE0D",
+		title: "What kind of activities are you working on the most?",
+		answers: [
+			{ 
+				text: "Virtual",
+				result: 1
+			},
+			{ 
+				text: "Workshop",
+				result: 2
+			},
+			{ 
+				text: "Advocacy or Activism",
+				result: 3
+			},
+			{ 
+				text: "Events",
+				result: 4
+			},
+		]
+	});
+	
+			
+
 	quiz.addResults([
 		{
 			id: 1,
-			text: "You're a number 1"
+			text: "You're a New Natalia You might be new new to open advocacy, but your new ideas and enthusiasm to celebrate Open Access Week is inspiring! If you are organizing outreach and events primarily alone, you will needs materials and ideas to raise awareness at your institution. Suggested activities for New Natalias: social media campaign, film screening and discussion or sending factsheets. Resources for New Natalia: 100 Stories of Impact, The Internet's Own Boy (film and background), factsheets and other resources."
 		},
 		{
 			id: 2,
-			text: "You're a Number 2"
+			text: " You're an Amped Amal You may be thrilled at the success of last year, and want to grow your institution’s Open Access Week events this year! You might primarily be organizing the week alone, but would like to involve colleagues in planning. An Amal might their zeal and ability to experiment to get more faculty engagement with the institutional repository. With solid experience under your belt, all you need is more resources and collaborators to break your previous record. Suggested activities for Amped Amal: an Upload-a-thon with department liaisons, a workshop with trivia night, or a meeting with with administration to advance open. Resources: workshop slidedeck, trivia ideas, quiz questions, upload-a-thon email template and talking points for administration."
+		},
+		{
+			id: 3,
+			text: "You're a Growing Gene! With the experience, knowledge, and resources of a seasoned advocate it may be your goal to grow Open Access Week and produce more tangible advocacy results throughout the year. You may be an advocate in a well-developed department at a research-intensive institution that offers you a small budget. You're most likely collaborating with a handful of very supportive colleagues to plan Open Access week events this year. Consider targeting a new audience, such as students, for wider impact. Suggested activities for Growing Genes: panel of faculty and students, invited speakers, discuss a resolution with administration, request student organizations to sign the Right to Research resolution or make a statement in support of open. Resources for Growing Genes: Right to Research brochures, resolution language, talking points for administration, and the Open Speakers database."
+		},
+		{
+			id: 4,
+			text: "You're a Connected Cate! Building relationships and coalitions is your strength! It's possible you live in a city with multiple institutions and organizations interested in Open Access. You’d like to take these connections and work together on larger events for this Open Access Week. If you are hoping to leverage recent conversations about open to create taskforces with deliverables during Open Access Week, here is a place to start. Suggested activities for Connected Cates: user support and training on tools for open, meeting with political officials to discuss policy or conducting multiple workshops across institutions. Resources for Connected Cates: talking points for administrations, workshop, edit-a-thons, data day training materials, doodle and sched for coordinating events."
 		},
 	]);
-</script>
+Contact GitHub API Training Shop Blog About
+© 2017 GitHub, Inc. Terms Privacy Security Status Help
 
 </body>
 </html>
